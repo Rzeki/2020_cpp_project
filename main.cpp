@@ -1,10 +1,20 @@
 #include <iostream>
-
+#include "GameClass.hpp"
 
 
 int main()
 {
-    std::cout<<"Tu powstanie gra Makao"<<std::endl;
+    Game game;
 
+
+//PETLA GRY
+    while (game.getWindowIsOpen())
+    {
+        //Odswiezanie obrazu
+        game.update();
+        //Wyswietlanie obrazu
+        game.render();
+    }
+//KONIEC PETLI
     return 0;
 }
