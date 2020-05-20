@@ -8,8 +8,11 @@ CO = g++
 GameClass.o: GameClass.cpp
 	$(CO) -c $< -o $@
 
+Menu.o: Menu.cpp
+	$(CO) -c $< -o $@
 
-DICES: main.cpp GameClass.o
+
+DICES: main.cpp GameClass.o Menu.o
 	$(CO) $^ -o DICES $(CFLAGS)
 
 .PHONY: run

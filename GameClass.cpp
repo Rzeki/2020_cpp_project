@@ -22,7 +22,7 @@ void Game::initWindow()
 {
     this->videoMode.height=720;
     this->videoMode.width=720;
-    this->window = new sf::RenderWindow(this->videoMode, "DICES",sf::Style::Titlebar | sf::Style::Close);
+    this->window = new sf::RenderWindow(this->videoMode, "DICES",sf::Style::Titlebar | sf::Style::Close); //inicjalizowanie glownego okna gry
 }
 
 void Game::update()
