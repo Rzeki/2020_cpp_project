@@ -38,7 +38,6 @@ int main()
                 }
                 if(event.key.code == sf::Keyboard::Return)
                 {
-
                     startup.close();
                 }
             }
@@ -49,6 +48,7 @@ int main()
         startup.display();
     }
     Game game;
+    game.get_pamount(Player_amount);
 //PETLA GRY
     while (game.getWindowIsOpen())
     {

@@ -12,12 +12,14 @@ private:
     sf::RenderWindow* window;
     sf::VideoMode videoMode;
     sf::Event event;
+    
 
     //Prywatne funkcje
     void initVariables();
     void initWindow();
 
 public:
+    int P_amount;
     Game(); //konstruktor
     ~Game(); //dekonstruktor   
 
@@ -28,7 +30,10 @@ public:
     void pollEvent();
     void update();
     void render();
+    void get_pamount(int a);
+    void cover(int a);
 };
+
 
 
 
