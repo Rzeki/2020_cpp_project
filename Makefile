@@ -1,6 +1,6 @@
 DIR = `basename $(CURDIR)`
 
-CFLAGS = -lsfml-graphics -lsfml-window -lsfml-system
+CFLAGS = -Wall -lsfml-graphics -lsfml-window -lsfml-system
 CO = g++
 
 #g++ main.o -o sfml-app -lsfml-graphics -lsfml-window -lsfml-system

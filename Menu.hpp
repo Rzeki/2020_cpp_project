@@ -4,6 +4,7 @@
 #include <SFML/System.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Window.hpp>
+#include <vector>
 
 #define MAX 4
 
@@ -22,7 +23,5 @@ private:
     sf::Text text[MAX];
 
 };
-
-
 
 #endif

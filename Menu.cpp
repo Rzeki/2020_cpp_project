@@ -39,9 +39,10 @@ Menu::~Menu() //dekonstruktor menu
 
 void Menu::draw(sf::RenderWindow &startup)
 {
-    for(int i = 0;i<MAX;i++)
+    std::vector<int> values = {0,1,2,3};
+    for(int v : values)
     {
-        startup.draw(text[i]);
+        startup.draw(text[v]);       //petla zakresowa
     }
 
 }

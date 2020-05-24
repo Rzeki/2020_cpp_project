@@ -2,19 +2,18 @@
 #include "GameClass.hpp"
 #include "Menu.hpp"
 
+int Player_amount=2;
 
 int main()
-{
-    
+{   
     sf::RenderWindow startup(sf::VideoMode(600,800),"DICES - Options",sf::Style::Close | sf::Style::Titlebar);
     Menu menu(startup.getSize().x,startup.getSize().y);
     sf::Texture texture;
     texture.loadFromFile("tlo.png");
     sf::Sprite sprite;
-    sf::Vector2u size = texture.getSize();
     sprite.setTexture(texture);
     sprite.setOrigin(0,0);
-    int Player_amount=2;
+    
     while(startup.isOpen())
     {
         sf::Event event;
@@ -47,8 +46,10 @@ int main()
         menu.draw(startup);
         startup.display();
     }
+//-----------------------GRA-------------------------------------------------------------------------
     Game game;
     game.get_pamount(Player_amount);
+    game.prepare_players(game.P_amount);
 //PETLA GRY
     while (game.getWindowIsOpen())
     {
@@ -59,4 +60,5 @@ int main()
     }
 //KONIEC PETLI
     return 0;
+//--------------------------------------------------------------------------------------------------------
 }

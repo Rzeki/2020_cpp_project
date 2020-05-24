@@ -4,6 +4,7 @@
 #include <SFML/System.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Window.hpp>
+#include <string.h>
 
 class Game
 {
@@ -13,6 +14,7 @@ private:
     sf::VideoMode videoMode;
     sf::Event event;
     
+    
 
     //Prywatne funkcje
     void initVariables();
@@ -20,6 +22,8 @@ private:
 
 public:
     int P_amount;
+    int p_sum[4];
+    int p_hp[4];
     Game(); //konstruktor
     ~Game(); //dekonstruktor   
 
@@ -32,7 +36,11 @@ public:
     void render();
     void get_pamount(int a);
     void cover(int a);
+    void prepare_players(int buf);
+    void draw_players_stats(int buf);
+
 };
+
 
 
 
