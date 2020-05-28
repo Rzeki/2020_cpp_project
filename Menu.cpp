@@ -2,7 +2,7 @@
 
 Menu::Menu(float width, float height)  //konstruktor menu
 {
-    if(!font.loadFromFile("Charming.otf"))
+    if(!font.loadFromFile("game-assets/Charming.otf"))
     {
         perror("Blad wczytywania czcionki");  //obsluga bledu odczytu czcionki
         exit(-1);

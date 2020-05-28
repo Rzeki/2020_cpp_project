@@ -9,7 +9,7 @@ int main()
     sf::RenderWindow startup(sf::VideoMode(600,800),"DICES - Options",sf::Style::Close | sf::Style::Titlebar);
     Menu menu(startup.getSize().x,startup.getSize().y);
     sf::Texture texture;
-    texture.loadFromFile("tlo.png");
+    texture.loadFromFile("game-assets/tlo.png");
     sf::Sprite sprite;
     sprite.setTexture(texture);
     sprite.setOrigin(0,0);
@@ -48,6 +48,7 @@ int main()
     }
 //-----------------------GRA-------------------------------------------------------------------------
     Game game;
+    srand(time(NULL));
     game.get_pamount(Player_amount);
     game.prepare_players(game.P_amount);
 //PETLA GRY
