@@ -8,19 +8,25 @@
 
 #define MAX 4
 
+class Game;
+
 class Menu
 {
 public:
-    Menu(float width, float height);
-    ~Menu();
+    int Player_amount; //liczba graczy ktora nastepnie przekazywana jest przez funkcje zaprzyjazniona do klasy Game
 
-    void draw(sf::RenderWindow &startup);
-    void MoveUP();
-    void MoveDown();
+    friend void getpamount(Menu menu,Game &game); //deklaracja przyjazni
+
+    Menu(float width, float height); //konstruktor pobierajacy wysokosc i szerokosc okna
+    ~Menu() = default; //dekonstruktor domyslny, poniewaz nic nie usuwa w tej klasie
+
+    void draw(sf::RenderWindow &startup); //rysowanie okna
+    void MoveUP();  //funkcja ktora przesuwa wybierany element w menu w gore
+    void MoveDown(); //j.w tylko w dol
 private:
-    int selectedItemIndex;
-    sf::Font font;
-    sf::Text text[MAX];
+    int selectedItemIndex; //wybrany indeks 
+    sf::Font font; //czcionka tekstu w menu
+    sf::Text text[MAX]; //tablica tekstow do wyswietlania liczby graczy i napisu u gory
 
 };
 

@@ -187,10 +187,6 @@ const bool Game::getWindowIsOpen() const
     return this->window->isOpen();
 }
 
-void Game::get_pamount(int a)
-{
-    this->P_amount = a;
-}
 
 void Game::cover(int a)
 {

@@ -2,14 +2,21 @@
 #include "GameClass.hpp"
 #include "Menu.hpp"
 
-int Player_amount=2;
+void getpamount(Menu menu,Game &game)
+{
+    game.P_amount=menu.Player_amount;  //funkcja zaprzyjazniona przekazujaca liczbe graczy z jednej klasy do drugiej
+}
 
 int main()
 {   
     sf::RenderWindow startup(sf::VideoMode(600,800),"DICES - Options",sf::Style::Close | sf::Style::Titlebar);
     Menu menu(startup.getSize().x,startup.getSize().y);
     sf::Texture texture;
-    texture.loadFromFile("game-assets/tlo.png");
+    if(!texture.loadFromFile("game-assets/tlo.png"))
+    {
+        perror("Blad wczytywania tla");  //obsluga bledu odczytu tla
+        exit(-1);
+    }
     sf::Sprite sprite;
     sprite.setTexture(texture);
     sprite.setOrigin(0,0);
@@ -27,29 +34,29 @@ int main()
             {
                 if(event.key.code == sf::Keyboard::Up)
                 {
-                    menu.MoveUP();
-                    Player_amount--;
+                    menu.MoveUP(); //poruszanie strzalka w gore w menu
+                    menu.Player_amount--;
                 }
                 if(event.key.code == sf::Keyboard::Down)
                 {
-                    menu.MoveDown();
-                    Player_amount++;
+                    menu.MoveDown(); //poruszanie strzalka w dol w menu
+                    menu.Player_amount++;
                 }
                 if(event.key.code == sf::Keyboard::Return)
                 {
-                    startup.close();
+                    startup.close();  //wcisniecie enter
                 }
             }
         }
-        startup.clear();
-        startup.draw(sprite);
-        menu.draw(startup);
-        startup.display();
+        startup.clear(); //odswiezanie klatki
+        startup.draw(sprite); //rysowanie tla
+        menu.draw(startup); //rysowanie tekstu
+        startup.display(); // wyswietlenie
     }
 //-----------------------GRA-------------------------------------------------------------------------
     Game game;
     srand(time(NULL));
-    game.get_pamount(Player_amount);
+    getpamount(menu,game);
     game.prepare_players(game.P_amount);
 //PETLA GRY
     while (game.getWindowIsOpen())

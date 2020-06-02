@@ -6,6 +6,9 @@
 #include <SFML/Window.hpp>
 #include <string.h>
 #include <iostream>
+#define MAX 4
+
+class Menu;
 
 class Game
 {
@@ -15,7 +18,7 @@ private:
     sf::VideoMode videoMode;
     sf::Event event;
     
-    
+    friend void getpamount(Menu menu,Game &game);    
 
     //Prywatne funkcje
     void initVariables();
@@ -23,8 +26,8 @@ private:
 
 public:
     int P_amount;
-    int p_sum[5];
-    int p_hp[5];
+    int p_sum[MAX];
+    int p_hp[MAX];
     int kosc1;
     int kosc2;
     int current_p_index;
@@ -39,6 +42,7 @@ public:
     Game(); //konstruktor
     ~Game(); //dekonstruktor   
 
+
     //AKCESORY
     const bool getWindowIsOpen() const;
 
@@ -46,7 +50,6 @@ public:
     void pollEvent();
     void update();
     void render();
-    void get_pamount(int a);
     void cover(int a);
     void prepare_players(int buf);
     void draw_players_stats(int buf);
@@ -54,7 +57,6 @@ public:
     void drawdices(sf::Sprite k1, sf::Sprite k2);
 
 };
-
 
 
 
