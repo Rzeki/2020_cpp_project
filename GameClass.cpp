@@ -1,18 +1,19 @@
 #include "GameClass.hpp"
 
-//KONSTRUKTOR
+//KONSTRUKTOR klasy Game
 Game::Game()
 {
     this->initVariables();
     this->initWindow();
 }
 
-//DEKONSTRUKTOR
+//DEKONSTRUKTOR klasy Game
 Game::~Game()
 {
     delete this->window;
 }
 
+//inicjalizacja zmiennych 
 void Game::initVariables()
 {
     this->window = nullptr;
@@ -31,13 +32,16 @@ void Game::initWindow()
 void Game::update()
 {
     this->pollEvent();
-    
 }
 
 void Game::render()
 {
     sf::Texture tlo;
-    tlo.loadFromFile("game-assets/gra-tlo.png");
+    if(!tlo.loadFromFile("game-assets/gra-tlo.png"))
+    {
+        perror("error loading game assets (gra-tlo.png)");
+        exit(-1);
+    }
     sf::Sprite sprite1;
     sf::Vector2u size = tlo.getSize();
     sprite1.setTexture(tlo);
@@ -103,27 +107,29 @@ void Game::pollEvent()
         {
             if(this->event.key.code == sf::Keyboard::Space)
             {
-                while(this->p_hp[this->current_p_index]==0)
+                //Logika gry
+                while(this->p_hp[this->current_p_index]==0) //pomijanie gracza z zerowym zyciem
                 {
                     this->current_p_index++;
                 }
-                if(this->current_p_index==this->P_amount)
+                if(this->current_p_index==this->P_amount) //sprawdzanie czy nastapilo zakonczenie rundy
                 {
-                    this->przegrany=0;
-                    this->suma_przegranego=13;
-                    for(int i=0;i<this->P_amount;i++)
+                    this->przegrany=0; //zerowanie indeksu przegranego gracza
+                    this->suma_przegranego=13; //ustawianie na najwieksza mozliwa liczbe do wyrzucenie z 2 kosci (+1) zeby miec pewnosc ze znajdziemy minimum
+                    for(int i=0;i<this->P_amount;i++) 
                     {
-                        if(this->p_hp[i]!=0)
+                        if(this->p_hp[i]!=0) //nie zliczanie punktow graczy ktorzy odpadli
                         {
-                            if(this->suma_przegranego>this->p_sum[i])
+                            if(this->suma_przegranego>this->p_sum[i]) // szukanie najmniejszego wyniku
                             {
-                                this->suma_przegranego=this->p_sum[i];
-                                this->przegrany=i;
+                                this->suma_przegranego=this->p_sum[i]; //ustawianie sumy przegranego
+                                this->przegrany=i; //oraz indeksu
                             } 
                         }
                         
                     }
-                    this->bufor=0;
+                    // nie tworzylem warunku na to gdy jest remis, bo musialbym zostawiac pustego ifa, bez dodawania niczego gdy nastapi remis runda jest powtarzana
+                    this->bufor=0; //zmienna bufor sprawdza czy przypadkiem najmniejszego wyniku nie posiadal jeszcze jeden gracz czyli czy nie nastapil remis
                     for(int j=0;j<this->P_amount;j++)
                     {
                         if(this->p_hp[j]!=0)
@@ -135,26 +141,27 @@ void Game::pollEvent()
                         }
                         
                     }
-                        if(this->bufor>1)
+                        /*if(this->bufor>1)
                         {
                           //remis    
                         }
-                        if(this->bufor==1)
+                        */
+                        if(this->bufor==1) //jezeli przegrany jest jeden
                         {
-                            this->p_hp[przegrany]--;
-                            this->bufor_przegranych=0;
+                            this->p_hp[przegrany]--; //odjecie zycia
+                            this->bufor_przegranych=0; //reset bufora ktory sprawdza liczbe przegranych graczy
                             for(int k=0;k<this->P_amount;k++)
                             {
                                 if(p_hp[k]==0)
                                 {
-                                    this->bufor_przegranych++;
+                                    this->bufor_przegranych++; //petla sprawdzajaca czy przypadkiem nie zostal ostatni (wygrany) gracz 
                                 }
                             }
-                            if(this->bufor_przegranych==(this->P_amount)-1)
+                            if(this->bufor_przegranych==(this->P_amount)-1) //sprawdzenie czy nie nastapil koniec gry
                             {
                                 for(int f=0;f<this->P_amount;f++)
                                 {
-                                    if(p_hp[f]!=0)
+                                    if(p_hp[f]!=0) //szukanie gracza z niezerowym zyciem
                                     {
                                         std::cout<<std::endl;
                                         std::cout<<"--------------WYGRAL GRACZ "<<f+1<<"---------------";
@@ -162,17 +169,17 @@ void Game::pollEvent()
                                         std::cout<<std::endl;
                                     }
                                 }
-                                this->window->close();
+                                this->window->close(); //zamkniecie gry
                             }
                         }    
                 
                     for(int g=0;g<this->P_amount;g++)
                     {
-                        this->p_sum[g]=0;
+                        this->p_sum[g]=0; //zerowanie sum graczy przed nowa runda
                     }
-                    this->current_p_index=0;
+                    this->current_p_index=0; //rozpoczecie nowej rundy
                 }
-                if(this->p_hp[current_p_index]!=0)
+                if(this->p_hp[current_p_index]!=0) //rzut koscmi tylko i wylacznie jezeli gracz ma wiecej niz 0 zyc
                 {
                     this->p_sum[current_p_index]=this->rolldices(kosc1,kosc2,this->s_kosc1,this->s_kosc2,this->t_kosc1,this->t_kosc2);
                 }
@@ -182,13 +189,13 @@ void Game::pollEvent()
     }
 }
 
-const bool Game::getWindowIsOpen() const
+const bool Game::getWindowIsOpen() const //sprawdzenie czy okno jest otwarte
 {
     return this->window->isOpen();
 }
 
 
-void Game::cover(int a)
+void Game::cover(int a) //zakrycie pol z wynikami odpowiedniej liczby graczy np. wybrano 2 graczy wiec zakryto pola gracza 3 i 4
 {
     sf::RectangleShape cover1;
     cover1.setFillColor(sf::Color(98,85,82));
@@ -207,7 +214,7 @@ void Game::cover(int a)
 
 }
 
-void Game::prepare_players(int buf)
+void Game::prepare_players(int buf) //przygotowanie graczy do gry
 {
     for(int i=0; i<buf; i++)
     {
@@ -222,55 +229,104 @@ int Game::rolldices(int kosc1,int kosc2, sf::Sprite & s_kosc1, sf::Sprite & s_ko
     s_kosc2.setPosition((rand()%151)+350,(rand()%101)+500);
     s_kosc1.rotate((rand()%20)+1);
     s_kosc2.rotate((rand()%20)+1);
+    //funkcja ta odpowiada za losowanie liczb oraz laduje odpowiednie obrazki wyrzuconych kosci, pobiera oryginaly wartosci ktore nastepnie ustawia
     
     kosc1=(rand()%6)+1;
     kosc2=(rand()%6)+1;
     switch(kosc1)
     {
         case 1:
-        t_kosc1.loadFromFile("game-assets/1.png");
+        if(!t_kosc1.loadFromFile("game-assets/1.png"))
+        {
+            perror("dice image error");
+            exit(-1);
+        }
         break;
         case 2:
-        t_kosc1.loadFromFile("game-assets/2.png");
+        if(!t_kosc1.loadFromFile("game-assets/2.png"))
+        {
+            perror("dice image error");
+            exit(-1);
+        }
         break;
         case 3:
-        t_kosc1.loadFromFile("game-assets/3.png");
+        if(!t_kosc1.loadFromFile("game-assets/3.png"))
+        {
+            perror("dice image error");
+            exit(-1);
+        }
         break;
         case 4:
-        t_kosc1.loadFromFile("game-assets/4.png");
+        if(!t_kosc1.loadFromFile("game-assets/4.png"))
+        {
+            perror("dice image error");
+            exit(-1);
+        }
         break;
         case 5:
-        t_kosc1.loadFromFile("game-assets/5.png");
+        if(!t_kosc1.loadFromFile("game-assets/5.png"))
+        {
+            perror("dice image error");
+            exit(-1);
+        }
         break;
         case 6:
-        t_kosc1.loadFromFile("game-assets/6.png");
+        if(!t_kosc1.loadFromFile("game-assets/6.png"))
+        {
+            perror("dice image error");
+            exit(-1);
+        }
         break;
     }
     switch(kosc2)
     {
         case 1:
-        t_kosc2.loadFromFile("game-assets/1.png");
+        if(!t_kosc2.loadFromFile("game-assets/1.png"))
+        {
+            perror("dice image error");
+            exit(-1);
+        }
         break;
         case 2:
-        t_kosc2.loadFromFile("game-assets/2.png");
+        if(!t_kosc2.loadFromFile("game-assets/2.png"))
+        {
+            perror("dice image error");
+            exit(-1);
+        }
         break;
         case 3:
-        t_kosc2.loadFromFile("game-assets/3.png");
+        if(!t_kosc2.loadFromFile("game-assets/3.png"))
+        {
+            perror("dice image error");
+            exit(-1);
+        }
         break;
         case 4:
-        t_kosc2.loadFromFile("game-assets/4.png");
+        if(!t_kosc2.loadFromFile("game-assets/4.png"))
+        {
+            perror("dice image error");
+            exit(-1);
+        }
         break;
         case 5:
-        t_kosc2.loadFromFile("game-assets/5.png");
+        if(!t_kosc2.loadFromFile("game-assets/5.png"))
+        {
+            perror("dice image error");
+            exit(-1);
+        }
         break;
         case 6:
-        t_kosc2.loadFromFile("game-assets/6.png");
+        if(!t_kosc2.loadFromFile("game-assets/6.png"))
+        {
+            perror("dice image error");
+            exit(-1);
+        }
         break;
     }
     s_kosc1.setTexture(t_kosc1);
     s_kosc2.setTexture(t_kosc2);
 
-    return kosc2+kosc1;
+    return kosc2+kosc1; //funkcja zwraca sume kosci
     
 }
 

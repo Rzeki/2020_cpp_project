@@ -9,6 +9,7 @@ void getpamount(Menu menu,Game &game)
 
 int main()
 {   
+    //---------------------------------------------MENU----------------------------------------------------
     sf::RenderWindow startup(sf::VideoMode(600,800),"DICES - Options",sf::Style::Close | sf::Style::Titlebar);
     Menu menu(startup.getSize().x,startup.getSize().y);
     sf::Texture texture;
@@ -53,6 +54,7 @@ int main()
         menu.draw(startup); //rysowanie tekstu
         startup.display(); // wyswietlenie
     }
+//--------------------------------------------------------------------------------------------------
 //-----------------------GRA-------------------------------------------------------------------------
     Game game;
     srand(time(NULL));

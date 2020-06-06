@@ -11,8 +11,8 @@ GameClass.o: GameClass.cpp
 Menu.o: Menu.cpp
 	$(CO) -c $< -o $@
 
-
-DICES: main.cpp GameClass.o Menu.o
+#dolaczenie bibliotek do maina
+DICES: main.cpp GameClass.o Menu.o 
 	$(CO) $^ -o DICES $(CFLAGS)
 
 .PHONY: run
