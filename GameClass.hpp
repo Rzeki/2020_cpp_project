@@ -58,6 +58,8 @@ public:
 
 };
 
+template <class S>
+S R_number(S a);
 
 
 

@@ -4,12 +4,12 @@
 
 void getpamount(Menu menu,Game &game)
 {
-    game.P_amount=menu.Player_amount;  //funkcja zaprzyjazniona przekazujaca liczbe graczy z jednej klasy do drugiej
+    game.P_amount=menu.Player_amount;  //funkcja zaprzyjazniona przekazujaca liczbe graczy z jednej klasy do drugiej (pobiera obiekty klas)
 }
 
 int main()
 {   
-    //---------------------------------------------MENU----------------------------------------------------
+    //---------------------------------------------MENU----------------------------------------------------(nie tworzylem wskaznika na okno menu, poniewaz szybko sie zamyka, a plynnosci potrzeba grze)
     sf::RenderWindow startup(sf::VideoMode(600,800),"DICES - Options",sf::Style::Close | sf::Style::Titlebar);
     Menu menu(startup.getSize().x,startup.getSize().y);
     sf::Texture texture;

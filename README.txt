@@ -4,11 +4,12 @@ Oddaje projekt zaliczeniowy, jest to gra w "Meksyk". Zasady sa bardzo proste, na
 Co zostalo uwzglednione:
 -Klasy (klasa Game oraz klasa Menu)
 -Konstruktory oraz dekonstruktory (w konstruktorach obu klas wykonywane sa rozne operacje, dekonstruktor klasy Menu ustawilem na domyslny poniewaz bylby pusty, a dekonstruktor klasy Game usuwa wskaznik okna gry)
--Funkcja zaprzyjazniona (przekazuje z klasy Menu do klasy Game liczbe graczy, w funkcji pobierane sa obiekty klas)
--Petla zakresowa for (uzywana do wyswietlenia napisow w Menu)
--STL szablony (uzycie szablonu array, ktora jest uzyta w petli zakresowej for)
+-Funkcja zaprzyjazniona (przekazuje z klasy Menu do klasy Game liczbe graczy, w funkcji pobierane sa obiekty klas)(znajduje sie w main.cpp)
+-Petla zakresowa for (uzywana do wyswietlenia napisow w Menu)(znajduje sie w Menu.cpp)
+-STL szablony (uzycie szablona array, ktora jest uzyta w petli zakresowej for) (Menu.cpp)
 -pliki .hpp i .cpp z definicjami metod (GameClass.hpp oraz Menu.hpp)
 -linker (w makefile)
+-szablon wlasnej funkcji (funkcja R_number w GameClass.cpp) (szablon funkcji losujacej liczby od 1 do wybranej wartosci (oraz wybranego typu))
 
 
 Uruchamianie:

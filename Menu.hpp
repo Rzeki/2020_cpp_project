@@ -8,7 +8,7 @@
 
 #define MAX 4
 
-class Game;
+class Game; //uprzedzenia klasy Menu ze istnieje klasa game z ktorej wezmiemy obiekt do funkcji zaprzyjaznionej
 
 class Menu
 {

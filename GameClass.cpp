@@ -21,6 +21,7 @@ void Game::initVariables()
     this->bufor_przegranych=0;
 }
 
+//inicjalizacja zmiennych okna
 void Game::initWindow()
 {
     this->videoMode.height=800;
@@ -29,11 +30,13 @@ void Game::initWindow()
     this->window->setFramerateLimit(60);
 }
 
+//sprawdzanie eventow
 void Game::update()
 {
     this->pollEvent();
 }
 
+//renderowanie na ekranie
 void Game::render()
 {
     sf::Texture tlo;
@@ -42,8 +45,8 @@ void Game::render()
         perror("error loading game assets (gra-tlo.png)");
         exit(-1);
     }
-    sf::Sprite sprite1;
-    sf::Vector2u size = tlo.getSize();
+    sf::Sprite sprite1; //sprite odpowiadajacy za tlo gry
+    sf::Vector2u size = tlo.getSize(); //dostosowanie rozmiaru do okna
     sprite1.setTexture(tlo);
     sprite1.setOrigin(0,0);
 
@@ -107,7 +110,7 @@ void Game::pollEvent()
         {
             if(this->event.key.code == sf::Keyboard::Space)
             {
-                //Logika gry
+                //Logika gry --------------------------------------------------------------------------------------------------------
                 while(this->p_hp[this->current_p_index]==0) //pomijanie gracza z zerowym zyciem
                 {
                     this->current_p_index++;
@@ -184,6 +187,7 @@ void Game::pollEvent()
                     this->p_sum[current_p_index]=this->rolldices(kosc1,kosc2,this->s_kosc1,this->s_kosc2,this->t_kosc1,this->t_kosc2);
                 }
                 this->current_p_index++;
+                //--------------------------------------------------------------------------------------------------------------------------
             }
         }
     }
@@ -231,8 +235,8 @@ int Game::rolldices(int kosc1,int kosc2, sf::Sprite & s_kosc1, sf::Sprite & s_ko
     s_kosc2.rotate((rand()%20)+1);
     //funkcja ta odpowiada za losowanie liczb oraz laduje odpowiednie obrazki wyrzuconych kosci, pobiera oryginaly wartosci ktore nastepnie ustawia
     
-    kosc1=(rand()%6)+1;
-    kosc2=(rand()%6)+1;
+    kosc1=R_number<int>(6); //uzycie szablonu wlasnej funkcji 
+    kosc2=R_number<int>(6);
     switch(kosc1)
     {
         case 1:
@@ -335,4 +339,10 @@ void Game::drawdices(sf::Sprite k1, sf::Sprite k2)
     this->window->draw(k1);
     this->window->draw(k2);
 
+}
+
+template <typename S>
+S R_number (S a)
+{
+    return (S)rand()%a + 1; //szablon funkcji ktora losuje liczby z zakresu od 1 do a;
 }
