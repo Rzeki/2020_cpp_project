@@ -14,9 +14,12 @@ Co zostalo uwzglednione:
 
 Uruchamianie:
 wystarczy wpisac w terminalu otwartm w pliku:
-make run
 
+make run
 gra otworzy menu, w ktorym wybieramy liczbe graczy za pomoca strzalek i zatwierdzamy enter. Dalsza czesc gry ma wlasciwie jeden przycisk sterujacy - spacje, dzieki niej rzucamy koscmi dla kazdego kolejnego gracza, gdy dojdzie do konca (ostatni gracz rzuci), kolejna spacja rozpoczyna nastepna runde. Gracz ktorego zycie spadnie do 0 jest pomijany przy nacisnieciu spacji.
+
+make clean
+czysci pliki binarne projektu
 
 z powazaniem i zyczeniami zdrowia
 Kacper Druzdzel
